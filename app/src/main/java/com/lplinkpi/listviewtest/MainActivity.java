@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Fruit> fruitList = new ArrayList<>();
 
     private void initFruits(){
-        for (int i = 0; i < 1 ;i++){  //添加一遍就好
+        for (int i = 0; i < 3 ;i++){  //三遍测试
             Fruit apple = new Fruit("apple",R.drawable.apple_pic);
             fruitList.add(apple);
 

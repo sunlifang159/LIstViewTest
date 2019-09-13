@@ -34,13 +34,33 @@ public class FruitAdaper extends ArrayAdapter<Fruit> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Fruit fruit = getItem(position); //获取当前项的Fruit实例
-        View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
 
-        ImageView fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
-        fruitImage.setImageResource(fruit.getImageId());
+        View view;
+        ViewHolder viewHolder;
 
-        TextView fruitName = (TextView) view.findViewById(R.id.fruit_name);
-        fruitName.setText(fruit.getName());
+        if (convertView == null){
+            view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+            viewHolder = new ViewHolder();
+            viewHolder.fruitIamge = (ImageView)view.findViewById(R.id.fruit_image);
+            viewHolder.fruitName = (TextView) view.findViewById(R.id.fruit_name);
+            view.setTag(viewHolder);//将viewHolder 存储在View中
+        } else {
+            view = convertView;
+            viewHolder = (ViewHolder)view.getTag();//重新获取viewHolder
+        }
+
+     //   ImageView fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+     //   fruitImage.setImageResource(fruit.getImageId());
+     //   TextView fruitName = (TextView) view.findViewById(R.id.fruit_name);
+     //   fruitName.setText(fruit.getName());
+
+        viewHolder.fruitIamge.setImageResource(fruit.getImageId());
+        viewHolder.fruitName.setText(fruit.getName());
         return view;
+    }
+
+     class ViewHolder {
+         ImageView fruitIamge;
+         TextView fruitName;
     }
 }
