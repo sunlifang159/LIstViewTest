@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,13 +97,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initFruits();
-        FruitAdaper adapter = new FruitAdaper(MainActivity.this,R.layout.fruit_item,fruitList);
+        FruitAdaper adapter = new FruitAdaper(MainActivity.this, R.layout.fruit_item, fruitList);
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(
         //        MainActivity.this,android.R.layout.simple_list_item_1,data);
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Fruit fruit = fruitList.get(i);
+                Toast.makeText(MainActivity.this,fruit.getName(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
     }
-
-
 }
